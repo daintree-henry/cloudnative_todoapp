@@ -4,7 +4,6 @@ COPY etc/mysql/conf.d/mysql.cnf /etc/mysql/conf.d/
 COPY sql /sql
 COPY init-data.sh /docker-entrypoint-initdb.d
 
-ENV MYSQL_DATABASE tododb
 ENV  MYSQL_ROOT_PASSWORD root
 
 EXPOSE 3306
