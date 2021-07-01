@@ -4,7 +4,7 @@ COPY sql /sql
 COPY init-data.sh /tmp/init-data.sh
 COPY etc/mysql/conf.d/mysql.cnf /etc/mysql/conf.d/
 
-RUN /tmp/init-data.sh
+RUN sudo /tmp/init-data.sh
 
 EXPOSE 3306
 
