@@ -1,8 +1,10 @@
 FROM mysql:5.7
 
 COPY sql /sql
-COPY ./init-data.sh /docker-entrypoint-initdb.d
+COPY init-data.sh /tmp/init-data.sh
 COPY etc/mysql/conf.d/mysql.cnf /etc/mysql/conf.d/
+
+RUN /tmp/init-data.sh
 
 EXPOSE 3306
 
