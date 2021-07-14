@@ -1,8 +1,12 @@
 $(document).ready(function() {
+    var service = $("#url").attr("url");
+    var port = $("#port").attr("port");
+    var url = 'http://'+service+':'+port+'/item'
+
     reloadToDo()
 
     function reloadToDo(sort = "") {
-        var url = 'http://127.0.0.1:3000/item'
+
         if (sort != "") {
             url = url + "?sort=" + sort
         }
@@ -50,7 +54,7 @@ $(document).ready(function() {
                                 <p class="card-text">${element.content}</p>
                                 <p class="card-text text-right">기한: ${d}</p>
         
-                                <a class="delete-${element.item_id} btn btn-info text-white float-right" id="${element.item_id}">done</a>
+                                <a class="delete-${element.id} btn btn-info text-white float-right" id="${element.id}">done</a>
                             </div>
                         </div>
                     </div>`
@@ -69,9 +73,9 @@ $(document).ready(function() {
     function addDeleteEventListener() {
         $("[class^=delete]").on("click", function() {
             $.ajax({
-                url: `http://127.0.0.1:3000/item/${this.id}`,
+                url: `${url}/${this.id}`,
                 dataType: 'json',
-                type: 'GET'
+                type: 'DELETE'
             }).done(function(result) {
                 console.log(result)
                 reloadToDo()
@@ -79,6 +83,7 @@ $(document).ready(function() {
             })
         })
     }
+    
     $("#postBtn").on("click", function() {
         var content = $('#content').val()
         var category = $('#category').val()
@@ -89,18 +94,20 @@ $(document).ready(function() {
         }
 
         $.ajax({
-            url: 'http://127.0.0.1:3000/item',
-            dataType: 'json',
-            type: 'POST',
+            url: url,
+            dataType: "JSON",
+            type: "POST",
             data: {
-                content: content,
-                category: category,
-                dueDate: dueDate
-            }
+                "content": content,
+                "category": category,
+                "dueDate": dueDate
+            },
         }).done(function(result) {
             console.log(result)
             reloadToDo()
             addDeleteEventListener()
+        }).fail(function(json){
+            console.log(json)
         })
     })
 
@@ -121,3 +128,21 @@ $(document).ready(function() {
         reloadToDo(sort)
     });
 })
+
+function test(){
+    var service = $("#url").attr("url");
+    var port = $("#port").attr("port");
+    var url = 'http://'+service+':'+port+'/item'
+    
+    console.log(url)
+    $.ajax({
+        url: url,
+        dataType: "JSON",
+        type: "POST",
+        data: {
+            "content": "test",
+            "category": "testcate",
+            "dueDate": "2020-07-10"
+        },
+    })
+}
