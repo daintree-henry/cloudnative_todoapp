@@ -11,9 +11,9 @@ app.use(express.static('views'));
 
 app.get('/',function(req,res){
     res.render('index', {
-        "url": process.env.APIURL,
-        "port": process.env.APIPORT,
-        "appname": process.env.APPNAME
+        "url": process.env.API_URL,
+        "port": process.env.API_PORT,
+        "appname": process.env.APP_NAME
     })
 });
 

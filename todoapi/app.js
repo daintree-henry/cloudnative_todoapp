@@ -2,17 +2,24 @@ const express = require('express')
 const mysql = require('mysql')
 
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 
 app.use(express.json())
 
 var conn = mysql.createConnection({
-  host     : process.env.MYSQL_HOST,
-  user     : process.env.MYSQL_USER,
-  password : process.env.MYSQL_ROOT_PASSWORD,
-  port     : 3306,
-  database : 'tododb'
+    host     : "localhost",
+    user     : "root",
+    password : "root",
+    port     : 3306,
+    database : "tododb",
 });
+// var conn = mysql.createConnection({
+//     host     : process.env.MYSQL_HOST,
+//     user     : process.env.MYSQL_USER,
+//     password : process.env.MYSQL_ROOT_PASSWORD,
+//     port     : process.env.MYSQL_PORT,
+//     database : process.env.MYSQL_DATABASE
+// });
 
 conn.connect();
 
