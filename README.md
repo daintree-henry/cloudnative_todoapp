@@ -1,5 +1,6 @@
 # Cloudnative_todoapp
 컨테이너 기반의 3 tier 애플리케이션 샘플
+![3tierapp](./3tierapp.jpg)
 
 - DB: Mysql 5.7 > 컨테이너 생성시 데이터 초기화 및 샘플데이터 생성
 
